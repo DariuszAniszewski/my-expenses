@@ -1,0 +1,61 @@
+{% load filters %}
+
+<h3>Today: {{ today }}</h3>
+<h3>Days left: {{ days_left }}</h3>
+
+<h3>Total income: {{ total_income|pln }}</h3>
+<h3>Total spent: {{ total|pln }}</h3>
+<h3>Left: {{ left|pln }}</h3>
+<h3>Left per day: {{ left_per_day|pln }}</h3>
+
+<table>
+    <thead>
+    <tr>
+        <td>Date</td>
+        <td>Place</td>
+        <td>Details</td>
+        <td>Amount</td>
+    </tr>
+    </thead>
+    <tbody>
+    {% for expense in expenses %}
+        <tr>
+            <td>{{ expense.date }}</td>
+            <td>{{ expense.place }}</td>
+            <td>
+                <table>
+                {% for item in expense.items %}
+                    <tr>
+                    <td>{{ item.category }}</td>
+                    <td>{{ item.subcategory }}</td>
+                    <td>{{ item.amount|pln }}</td>
+                    <td>{{ item.notes }}</td>
+                    </tr>
+                {% endfor %}
+                </table>
+            </td>
+            <td>{{ expense.total|pln }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    <tfoot>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>{{ total|pln }}</td>
+    </tr>
+    </tfoot>
+</table>
+
+<table>
+
+    {% for category in categories %}
+        <tr>
+        <td>{{ category.name }}</td>
+        <td>{{ category.total|pln }}</td>
+        <td></td>
+        </tr>
+
+    {% endfor %}
+</table>
