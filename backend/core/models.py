@@ -16,7 +16,7 @@ class SubCategory(models.Model):
     name = models.CharField(max_length=128, unique=True)
 
     def __str__(self):
-        return self.name
+        return f"{self.category} / {self.name}"
 
 
 class Place(models.Model):
