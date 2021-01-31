@@ -31,6 +31,10 @@ class Expense(models.Model):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
     date = models.DateField()
     place = models.ForeignKey(Place, on_delete=models.PROTECT)
+    date_year = models.IntegerField(editable=False, null=True)
+    date_month = models.IntegerField(editable=False, null=True)
+    date_day = models.IntegerField(editable=False, null=True)
+    paid_with_credit_card = models.BooleanField(default=False)
 
     def _get_total(self) -> int:
         items = ExpenseItem.objects.filter(expense=self)
@@ -40,6 +44,12 @@ class Expense(models.Model):
 
     def items(self):
         return self.expenseitem_set.all()
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        self.date_year = self.date.year
+        self.date_month = self.date.month
+        self.date_day = self.date.day
+        super().save(force_insert, force_update, using, update_fields)
 
 
 class ExpenseItem(models.Model):
