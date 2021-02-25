@@ -4,6 +4,10 @@ from django.contrib import admin
 from core.models import Category, SubCategory, Place, Expense, ExpenseItem, Income
 
 
+class IncomeAdmin(admin.ModelAdmin):
+    list_display = ["date", "amount", 'category', "subcategory"]
+
+
 class PlaceAdmin(admin.ModelAdmin):
     search_fields = ["name"]
     ordering = ["name"]
@@ -38,5 +42,5 @@ class ExpenseAdmin(admin.ModelAdmin):
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(SubCategory, SubCategoryAdmin)
 admin.site.register(Place, PlaceAdmin)
-admin.site.register(Income)
+admin.site.register(Income, IncomeAdmin)
 admin.site.register(Expense, ExpenseAdmin)
