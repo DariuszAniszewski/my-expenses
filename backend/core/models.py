@@ -13,10 +13,13 @@ class Category(models.Model):
 class SubCategory(models.Model):
     id = models.UUIDField(default=uuid.uuid4, primary_key=True, editable=False)
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
-    name = models.CharField(max_length=128, unique=True)
+    name = models.CharField(max_length=128)
 
     def __str__(self):
         return f"{self.category} / {self.name}"
+
+    class Meta:
+        unique_together = ["category", "name"]
 
 
 class Place(models.Model):
