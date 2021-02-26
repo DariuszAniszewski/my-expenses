@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', core.views.index),
     path('<int:year>', core.views.view_year, name="year"),
+    path('<int:year>/<int:month>', core.views.view_month, name="month"),
 ]
