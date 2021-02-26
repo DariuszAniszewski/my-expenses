@@ -6,6 +6,7 @@ from core.models import Category, SubCategory, Place, Expense, ExpenseItem, Inco
 
 class IncomeAdmin(admin.ModelAdmin):
     list_display = ["date", "amount", 'category', "subcategory"]
+    readonly_fields = ('date_year', 'date_month', 'date_day')
 
 
 class PlaceAdmin(admin.ModelAdmin):

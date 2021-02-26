@@ -67,3 +67,12 @@ class Income(models.Model):
     amount = models.IntegerField()
     category = models.ForeignKey(Category, on_delete=models.PROTECT)
     subcategory = models.ForeignKey(SubCategory, on_delete=models.PROTECT, blank=True, null=True)
+    date_year = models.IntegerField(editable=False, null=True)
+    date_month = models.IntegerField(editable=False, null=True)
+    date_day = models.IntegerField(editable=False, null=True)
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        self.date_year = self.date.year
+        self.date_month = self.date.month
+        self.date_day = self.date.day
+        super().save(force_insert, force_update, using, update_fields)
