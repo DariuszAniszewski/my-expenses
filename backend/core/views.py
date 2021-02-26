@@ -1,21 +1,14 @@
 from collections import defaultdict
-from calendar import monthrange
-
 from django.contrib.admin.views.decorators import staff_member_required
-from django.shortcuts import render
-
-# Create your views here.
+from django.shortcuts import render, redirect
 from django.views.generic.dates import timezone_today
-
 from core.models import Expense, Income
 
 
 @staff_member_required
 def index(request):
-    data = {
-        "page": "home"
-    }
-    return render(request, "index.html", data)
+    today = timezone_today()
+    return redirect("month", today.year, today.month)
 
 
 def view_month(request, year, month):
