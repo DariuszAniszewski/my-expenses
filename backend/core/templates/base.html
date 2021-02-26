@@ -23,9 +23,19 @@
                 <li class="nav-item">
                     <a class="nav-link {% if page == "home" %}active{% endif %}" aria-current="page" href="#">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link {% if page == "2021" %}active{% endif %}" aria-current="page"
-                       href="{% url 'year' 2021 %}">2021</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        2021
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'year' 2021 %}">Cały rok</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="{% url 'month' 2021 01 %}">Styczeń</a></li>
+                        <li><a class="dropdown-item" href="{% url 'month' 2021 02 %}">Luty</a></li>
+                    </ul>
                 </li>
             </ul>
         </div>
