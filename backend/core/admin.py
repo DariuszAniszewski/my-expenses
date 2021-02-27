@@ -24,7 +24,7 @@ class SubCategoryAdmin(admin.ModelAdmin):
     ordering = ["category__name", "name"]
 
 
-class ExpenseItemInlineAdmin(admin.TabularInline):
+class ExpenseItemInlineAdmin(admin.StackedInline):
     model = ExpenseItem
     autocomplete_fields = ["category", "subcategory"]
 
