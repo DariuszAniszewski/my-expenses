@@ -12,16 +12,16 @@ def index(request):
 
 
 def view_month(request, year, month):
-    all_expenses = Expense.objects.filter(date_year=year, date_month=month).order_by('date')
-    all_income = Income.objects.filter(date_year=year, date_month=month).order_by('date')
+    all_expenses = Expense.objects.filter(date_year=year, date_month=month).order_by('-date')
+    all_income = Income.objects.filter(date_year=year, date_month=month).order_by('-date')
 
     data = __do_all_calculations(all_expenses, all_income)
     return render(request, "expenses.html", data)
 
 
 def view_year(request, year):
-    all_expenses = Expense.objects.filter(date_year=year).order_by('date')
-    all_income = Income.objects.filter(date_year=year).order_by('date')
+    all_expenses = Expense.objects.filter(date_year=year).order_by('-date')
+    all_income = Income.objects.filter(date_year=year).order_by('-date')
 
     data = __do_all_calculations(all_expenses, all_income)
     return render(request, "expenses.html", data)
