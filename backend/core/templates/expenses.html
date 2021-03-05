@@ -126,6 +126,27 @@
                 {% endfor %}
                 </tbody>
             </table>
+            <br/>
+            <br/>
+            <h3>Dni</h3>
+            <table class="table table-hover" data-toggle="table">
+                <thead>
+                <tr>
+                    <th>Dzień</th>
+                    <th>Kwota</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for day in days %}
+                    <tr>
+                        <td>{{ day.name }}</td>
+                        <td>{{ day.total|pln }}</td>
+                        <td>{{ day.percentage }}%</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 

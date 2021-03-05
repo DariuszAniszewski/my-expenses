@@ -33,6 +33,7 @@ def __do_all_calculations(all_expenses, all_income):
     categories = defaultdict(lambda: {"items": [], "total": 0})
     subcategories = defaultdict(lambda: {"items": [], "total": 0})
     places = defaultdict(lambda: {"items": [], "total": 0})
+    days = defaultdict(lambda: {"items": [], "total": 0})
     # calculate_totals first
     for expense in all_expenses:
         total += expense.total
@@ -42,6 +43,9 @@ def __do_all_calculations(all_expenses, all_income):
         places[expense.place.name]["name"] = expense.place.name
         places[expense.place.name]["total"] += expense.total
         places[expense.place.name]["percentage"] = round(100 * places[expense.place.name]["total"] / total)
+        days[expense.date]["name"] = expense.date
+        days[expense.date]["total"] += expense.total
+        days[expense.date]["percentage"] = round(100 * days[expense.date]["total"] / total)
         for item in expense.items():
             categories[item.category.name]["name"] = item.category.name
             categories[item.category.name]["items"].append(item)
@@ -56,6 +60,7 @@ def __do_all_calculations(all_expenses, all_income):
     categories = sorted(dict(categories).values(), key=lambda i: -i["total"])
     subcategories = sorted(dict(subcategories).values(), key=lambda i: -i["total"])
     places = sorted(dict(places).values(), key=lambda i: -i["total"])
+    days = sorted(dict(days).values(), key=lambda i: i["name"])
     income_total = sum([income.amount for income in all_income])
     left = income_total - total
     data = {
@@ -65,6 +70,7 @@ def __do_all_calculations(all_expenses, all_income):
         "subcategories": subcategories,
         "paid_with_credit_card": paid_with_credit_card_total,
         "places": places,
+        "days": days,
         "total": total,
         "left": left,
     }
